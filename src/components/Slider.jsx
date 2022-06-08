@@ -94,6 +94,7 @@ const Button = styled.button`
   transition: all 0.2s ease;
   font-size: 18px;
   cursor: pointer;
+  border: 0.5px solid white;
 
   &:hover {
     transform: translate(10px, 10px);
