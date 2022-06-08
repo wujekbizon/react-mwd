@@ -17,6 +17,10 @@ const Left = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
+  opacity: 0.5;
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 const Logo = styled.h1`
@@ -50,7 +54,7 @@ const SocialIcon = styled.div`
 const Center = styled.div`
   flex: 1;
   padding: 20px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: #d2dae2;
 `;
 
 const Title = styled.h3`
@@ -69,11 +73,16 @@ const List = styled.ul`
 const ListItem = styled.li`
   width: 50%;
   margin-bottom: 10px;
+  font-size: 18px;
 `;
 
 const Right = styled.div`
   flex: 1;
   padding: 20px;
+  opacity: 0.4;
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 const ContactItem = styled.div`
@@ -81,6 +90,7 @@ const ContactItem = styled.div`
   margin-left: 10px;
   display: flex;
   align-items: center;
+  font-size: 18px;
   font-weight: 300;
 `;
 
