@@ -59,6 +59,8 @@ const Right = styled.div`
 
 const NavItem = styled.div`
   margin-left: 30px;
+  font-size: 14px;
+  cursor: pointer;
 `;
 
 const Navbar = () => {

@@ -34,7 +34,7 @@ const Arrow = styled.div`
 const Wrapper = styled.div`
   height: 100%;
   display: flex;
-  transition: all 1s ease;
+  transition: all 1.4s ease;
   transform: translateX(${(props) => props.slideIndex * -100}vw);
 `;
 
@@ -47,7 +47,6 @@ const Slide = styled.div`
 `;
 
 const ImgContainer = styled.div`
-  /* margin-top: 15px; */
   height: 100%;
   flex: 1;
 `;
@@ -55,6 +54,7 @@ const ImgContainer = styled.div`
 const Image = styled.img`
   height: 90%;
   width: 100%;
+  object-fit: cover;
 `;
 
 const InfoContainer = styled.div`
@@ -62,11 +62,43 @@ const InfoContainer = styled.div`
   flex: 1;
 `;
 
-const Title = styled.h1``;
+const Title = styled.h1`
+  font-weight: 300;
+  font-size: 60px;
+`;
 
-const Desc = styled.p``;
+const Desc = styled.p`
+  margin: 50px 0px;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 3px;
+`;
 
-const Button = styled.button``;
+const ButtonContainer = styled.div`
+  width: 180px;
+  height: 60px;
+  border: 1px solid black;
+  background-color: white;
+  position: relative;
+`;
+
+const Button = styled.button`
+  width: 180px;
+  height: 60px;
+  background-color: black;
+  color: white;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  backface-visibility: hidden;
+  transition: all 0.2s ease;
+  font-size: 18px;
+  cursor: pointer;
+
+  &:hover {
+    transform: translate(10px, 10px);
+  }
+`;
 
 const Slider = () => {
   const [slideIndex, setSlideIndex] = useState(0);
@@ -93,7 +125,9 @@ const Slider = () => {
             <InfoContainer>
               <Title>{item.title}</Title>
               <Desc>{item.desc}</Desc>
-              <Button>Shop</Button>
+              <ButtonContainer>
+                <Button>{item.buttonTxt}</Button>
+              </ButtonContainer>
             </InfoContainer>
           </Slide>
         ))}
