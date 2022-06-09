@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import ArrowBackIosOutlinedIcon from '@mui/icons-material/ArrowBackIosOutlined';
 import { sliderItems } from '../data';
+// Responsive
+import { mobile, mobileS } from '../responsive';
 
 const Container = styled.div`
   width: 100%;
@@ -44,27 +46,32 @@ const Slide = styled.div`
   display: flex;
   align-items: center;
   background-color: ${(props) => props.bg};
+  ${mobile({ flexDirection: 'column' })}
 `;
 
 const ImgContainer = styled.div`
   height: 100%;
   flex: 1;
+  ${mobile({ height: '50%' })}
 `;
 
 const Image = styled.img`
   height: 90%;
   width: 100%;
   object-fit: cover;
+  ${mobile({ width: '100vw' })}
 `;
 
 const InfoContainer = styled.div`
   padding: 50px;
   flex: 1;
+  ${mobile({ padding: '10px ' })}
 `;
 
 const Title = styled.h1`
   font-weight: 300;
   font-size: 60px;
+  ${mobile({ fontSize: '35px', textAlign: 'center' })}
 `;
 
 const Desc = styled.p`
@@ -72,6 +79,7 @@ const Desc = styled.p`
   font-size: 20px;
   font-weight: 500;
   letter-spacing: 3px;
+  ${mobile({ fontSize: '16px', textAlign: 'center', margin: '25px 0px' })}
 `;
 
 const ButtonContainer = styled.div`
@@ -80,6 +88,7 @@ const ButtonContainer = styled.div`
   border: 1px solid black;
   background-color: white;
   position: relative;
+  ${mobile({ left: '90px' })}
 `;
 
 const Button = styled.button`

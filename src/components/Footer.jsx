@@ -7,9 +7,12 @@ import PinterestIcon from '@mui/icons-material/Pinterest';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+// Responsive
+import { mobile } from '../responsive';
 
 const Container = styled.div`
   display: flex;
+  ${mobile({ flexDirection: 'column' })}
 `;
 
 const Left = styled.div`
@@ -18,6 +21,7 @@ const Left = styled.div`
   flex-direction: column;
   padding: 20px;
   opacity: 0.5;
+  ${mobile({ opacity: 1 })}
   &:hover {
     opacity: 1;
   }
@@ -27,15 +31,18 @@ const Logo = styled.h1`
   font-size: 45px;
   font-weight: 500;
   font-style: italic;
+  ${mobile({ textAlign: 'center' })}
 `;
 const Desc = styled.p`
   margin: 20px 0px;
   font-weight: 400;
   font-size: 18px;
+  ${mobile({ textAlign: 'center' })}
 `;
 
 const SocialContainer = styled.div`
   display: flex;
+  ${mobile({ justifyContent: 'center' })}
 `;
 
 const SocialIcon = styled.div`
@@ -55,10 +62,12 @@ const Center = styled.div`
   flex: 1;
   padding: 20px;
   background-color: #d2dae2;
+  ${mobile({ display: 'none' })}
 `;
 
 const Title = styled.h3`
   margin-bottom: 30px;
+  ${mobile({ textAlign: 'center' })}
 `;
 
 const List = styled.ul`
@@ -80,6 +89,8 @@ const Right = styled.div`
   flex: 1;
   padding: 20px;
   opacity: 0.4;
+  ${mobile({ opacity: 1 })}
+
   &:hover {
     opacity: 1;
   }
@@ -96,6 +107,7 @@ const ContactItem = styled.div`
 
 const Payment = styled.img`
   width: 60%;
+  ${mobile({ width: '80%' })}
 `;
 
 const Footer = () => {
