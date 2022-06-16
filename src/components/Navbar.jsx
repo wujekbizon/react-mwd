@@ -44,6 +44,10 @@ const Input = styled.input`
   border: none;
   font-style: italic;
   ${mobile({ width: '40px' })}
+
+  &.active,&:focus {
+    outline: none;
+  }
 `;
 
 const Center = styled.div`
