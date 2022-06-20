@@ -1,0 +1,9 @@
+* {
+  margin: 0;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}

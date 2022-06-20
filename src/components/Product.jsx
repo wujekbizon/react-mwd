@@ -19,6 +19,7 @@ const Image = styled.img`
   width: 90%;
   height: 90%;
   z-index: 2;
+  object-fit: contain;
 `;
 
 const Info = styled.div`

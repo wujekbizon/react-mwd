@@ -4,7 +4,7 @@ import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutl
 import ArrowBackIosOutlinedIcon from '@mui/icons-material/ArrowBackIosOutlined';
 import { sliderItems } from '../data';
 // Responsive
-import { mobile, mobileS } from '../responsive';
+import { mobile } from '../responsive';
 
 const Container = styled.div`
   width: 100%;

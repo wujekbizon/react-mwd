@@ -3,6 +3,8 @@ import Navbar from '../components/Navbar';
 import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
 import Products from '../components/Products';
+import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
 // Responsive
 import { mobile } from '../responsive';
 
@@ -39,6 +41,19 @@ const Select = styled.select`
 const Option = styled.option``;
 
 const ProductList = () => {
+  const location = useLocation();
+  const cat = location.pathname.split('/')[2];
+  const [filters, setFilters] = useState({});
+  const [sort, setSort] = useState('newest');
+
+  const handleFilters = (e) => {
+    const value = e.target.value;
+    setFilters({
+      ...filters,
+      [e.target.name]: value,
+    });
+  };
+
   return (
     <Container>
       <Navbar />
@@ -46,19 +61,15 @@ const ProductList = () => {
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>
-          <Select>
-            <Option disabled selected>
-              Material
-            </Option>
+          <Select name="size" onChange={handleFilters}>
+            <Option disabled>Material</Option>
             <Option>Oak</Option>
             <Option>Walnut</Option>
             <Option>Mahogany</Option>
             <Option>Teak</Option>
           </Select>
-          <Select>
-            <Option disabled selected>
-              Finish
-            </Option>
+          <Select name="color" onChange={handleFilters}>
+            <Option disabled>Finish</Option>
             <Option>Matt</Option>
             <Option>Semi-Glass</Option>
             <Option>Glass</Option>
@@ -68,14 +79,14 @@ const ProductList = () => {
         </Filter>
         <Filter>
           <FilterText>Sort Products:</FilterText>
-          <Select>
-            <Option selected>Newest</Option>
-            <Option>Price (asc)</Option>
-            <Option>Price (desc)</Option>
+          <Select onChange={(e) => setSort(e.target.value)}>
+            <Option value="newest">Newest</Option>
+            <Option value="asc">Price (asc)</Option>
+            <Option value="desc">Price (desc)</Option>
           </Select>
         </Filter>
       </FilterContainer>
-      <Products />
+      <Products cat={cat} filters={filters} sort={sort} />
       <Newsletter />
       <Footer />
     </Container>

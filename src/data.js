@@ -38,16 +38,19 @@ export const categories = [
     id: 1,
     img: 'https://images.pexels.com/photos/8146218/pexels-photo-8146218.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     title: 'DINING TABLES',
+    cat: 'tables',
   },
   {
     id: 2,
     img: 'https://images.pexels.com/photos/6208155/pexels-photo-6208155.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     title: 'WOODEN ACCESSORIES',
+    cat: 'accesories',
   },
   {
     id: 3,
     img: 'https://images.unsplash.com/photo-1596639103739-91d96a629071?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2020&q=80',
     title: 'ART WORK',
+    cat: 'art',
   },
 ];
 
