@@ -1,4 +1,8 @@
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { login } from '../redux/apiCalls';
 // Responsive
 import { mobile } from '../responsive';
 
@@ -41,35 +45,59 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  width: 40%;
+  width: 100%;
   border: none;
   padding: 15px 20px;
-  margin-top: 5px;
-  margin-bottom: 10px;
+  margin: 5px 5px 10px 0px;
   background-color: black;
   color: white;
   cursor: pointer;
   ${mobile({ width: '100%' })}
 `;
 
-const Link = styled.a`
+const Span = styled.span`
   margin: 5px 0px;
-  font-size: 12px;
+  font-size: 11px;
   text-decoration: underline;
   cursor: pointer;
 `;
 
+const Error = styled.span`
+  color: red;
+`;
+
 const Login = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  const { isFetching, error } = useSelector((state) => state.user);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    login(dispatch, { username, password });
+  };
+
   return (
     <Container>
       <Wrapper>
         <Title>SIGN IN</Title>
         <Form>
-          <Input placeholder="username" />
-          <Input placeholder="password" />
-          <Button>LOGIN</Button>
-          <Link>FORGOT PASSWORD?</Link>
-          <Link>CREATE A NEW ACCOUNT</Link>
+          <Input
+            placeholder="username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <Input
+            placeholder="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button onClick={handleLogin} disabled={isFetching}>
+            LOGIN
+          </Button>
+          <Error>{error ? 'Something went wrong...' : ''}</Error>
+          <Span>FORGOT PASSWORD?</Span>
+          <Link className="link" to="/register">
+            <Span>CREATE A NEW ACCOUNT</Span>
+          </Link>
         </Form>
       </Wrapper>
     </Container>

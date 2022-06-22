@@ -57,24 +57,24 @@ const ProductList = () => {
   return (
     <Container>
       <Navbar />
-      <Title>Chairs</Title>
+      <Title>{cat.toLocaleUpperCase()}</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>
-          <Select name="size" onChange={handleFilters}>
-            <Option disabled>Material</Option>
-            <Option>Oak</Option>
-            <Option>Walnut</Option>
-            <Option>Mahogany</Option>
-            <Option>Teak</Option>
-          </Select>
           <Select name="color" onChange={handleFilters}>
-            <Option disabled>Finish</Option>
-            <Option>Matt</Option>
-            <Option>Semi-Glass</Option>
-            <Option>Glass</Option>
-            <Option>Oil</Option>
-            <Option>Wax</Option>
+            <Option disabled>Color</Option>
+            <Option value="#e7cfb4">Oak</Option>
+            <Option value="#563232">Walnut</Option>
+            <Option value="#84240c">Mahogany</Option>
+            <Option value="#da6d42">Teak</Option>
+          </Select>
+          <Select name="size" onChange={handleFilters}>
+            <Option disabled>Size</Option>
+            <Option>XS</Option>
+            <Option>S</Option>
+            <Option>M</Option>
+            <Option>L</Option>
+            <Option>XL</Option>
           </Select>
         </Filter>
         <Filter>

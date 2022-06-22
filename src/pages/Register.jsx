@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 // Responsive
 import { mobile } from '../responsive';
@@ -48,13 +49,20 @@ const Agreement = styled.span`
 `;
 
 const Button = styled.button`
-  width: 40%;
+  width: 100%;
   border: none;
   padding: 15px 20px;
   background-color: black;
   color: white;
   cursor: pointer;
+  margin: 0px 5px 10px 5px;
   ${mobile({ width: '100%' })}
+`;
+
+const Span = styled.span`
+  font-size: 11px;
+  text-decoration: underline;
+  cursor: pointer;
 `;
 
 const Register = () => {
@@ -75,6 +83,9 @@ const Register = () => {
           </Agreement>
           <Button>CREATE</Button>
         </Form>
+        <Link className="link" to="/login">
+          <Span>ALREADY HAVE AN ACCOUNT?</Span>
+        </Link>
       </Wrapper>
     </Container>
   );

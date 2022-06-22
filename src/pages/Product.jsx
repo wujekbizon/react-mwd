@@ -3,8 +3,13 @@ import Navbar from '../components/Navbar';
 import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
 import { Add, Remove } from '@mui/icons-material';
+import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { publicRequest } from '../requestMethods';
+import { addProduct } from '../redux/cartRedux';
 // Responsive
 import { mobile } from '../responsive';
+import { useDispatch } from 'react-redux';
 
 const Container = styled.div``;
 
@@ -16,11 +21,13 @@ const Wrapper = styled.div`
 
 const ImgContainer = styled.div`
   flex: 1;
+  height: 100%;
 `;
 
 const Image = styled.img`
   width: 100%;
   height: 80vh;
+  object-fit: contain;
   ${mobile({ height: '40vh' })}
 `;
 
@@ -78,7 +85,7 @@ const FilterColor = styled.div`
 
 const FilterSize = styled.select`
   margin-left: 10px;
-  padding: 10px;
+  padding: 5px;
   cursor: pointer;
 `;
 
@@ -117,6 +124,7 @@ const ButtonContainer = styled.div`
   border: 1px solid black;
   background-color: white;
   position: relative;
+  margin-left: 30px;
 `;
 
 const Button = styled.button`
@@ -136,59 +144,102 @@ const Button = styled.button`
   }
 `;
 
+const Span = styled.div`
+  color: red;
+  font-size: 18px;
+  margin-left: 10px;
+  text-align: center;
+`;
+
 const Product = () => {
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const id = location.pathname.split('/')[2];
+  const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
+  const [color, setColor] = useState(null);
+  const [size, setSize] = useState(null);
+  const [isValid, setValid] = useState(false);
+
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res = await publicRequest.get(`/products/find/${id}`);
+        setProduct(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    if (id) {
+      getProduct();
+    }
+  }, [id]);
+
+  const handleAddToCart = () => {
+    if (!color && !size) {
+      setValid(true);
+    } else {
+      setValid(false);
+      dispatch(
+        addProduct({
+          ...product,
+          quantity,
+          color,
+          size,
+        })
+      );
+    }
+  };
+
   return (
     <Container>
       <Navbar />
       <Wrapper>
         <ImgContainer>
-          <Image src="https://cdn.pixabay.com/photo/2015/11/06/13/28/table-1027888_960_720.jpg" />
+          <Image src={product.img} />
         </ImgContainer>
         <InfoContainer>
-          <Title>Solid Oak Table</Title>
-          <Desc>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde qui a
-            molestias blanditiis sunt corrupti nobis ab. Culpa dolor, quos sint
-            dolore nihil, laborum aperiam veniam id quaerat enim illo. Lorem
-            ipsum dolor sit amet consectetur adipisicing elit. Id omnis,
-            consequuntur cumque, dolorum saepe non culpa molestiae illum
-            repellendus amet voluptate dolor quaerat voluptates modi provident,
-            accusantium odit fuga hic?
-          </Desc>
-          <Price>$1449.99</Price>
+          <Title>{product.title}</Title>
+          <Desc>{product.desc}</Desc>
+          <Price>$ {product.price}</Price>
           <FilterContainer>
             <Filter>
               <FilterTitle>Color</FilterTitle>
-              <FilterColor color="white" />
-              <FilterColor color="#F8EFBA" />
-              <FilterColor color="rgba(0,0,0,0.1)" />
+              {product.color?.map((c) => (
+                <FilterColor color={c} key={c} onClick={() => setColor(c)} />
+              ))}
             </Filter>
             <Filter>
-              <FilterTitle>Finish</FilterTitle>
-              <FilterSize>
-                <FilterSizeOption>Color</FilterSizeOption>
-                <FilterSizeOption>Matt</FilterSizeOption>
-                <FilterSizeOption>Semi-Glass</FilterSizeOption>
-                <FilterSizeOption>Glass</FilterSizeOption>
-                <FilterSizeOption>Oil</FilterSizeOption>
-                <FilterSizeOption>Wax</FilterSizeOption>
+              <FilterTitle>Size</FilterTitle>
+              <FilterSize onChange={(e) => setSize(e.target.value)}>
+                {product.size?.map((s) => (
+                  <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                ))}
               </FilterSize>
             </Filter>
           </FilterContainer>
 
           <AddContainer>
             <AmountContainer>
-              <Remove style={{ cursor: 'pointer' }} />
-              <Amount>1</Amount>
-              <Add style={{ cursor: 'pointer' }} />
+              <Remove
+                style={{ cursor: 'pointer' }}
+                onClick={() =>
+                  setQuantity(quantity <= 1 ? quantity : quantity - 1)
+                }
+              />
+              <Amount>{quantity}</Amount>
+              <Add
+                style={{ cursor: 'pointer' }}
+                onClick={() => setQuantity(quantity + 1)}
+              />
             </AmountContainer>
             <ButtonContainer>
-              <Button>ADD TO CART</Button>
+              <Button onClick={handleAddToCart}>ADD TO CART</Button>
             </ButtonContainer>
+            {isValid ? <Span>You must choose color and size</Span> : ''}
           </AddContainer>
         </InfoContainer>
       </Wrapper>
-
       <Newsletter />
       <Footer />
     </Container>

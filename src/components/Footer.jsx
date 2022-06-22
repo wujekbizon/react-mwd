@@ -7,6 +7,7 @@ import PinterestIcon from '@mui/icons-material/Pinterest';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import { Link } from 'react-router-dom';
 // Responsive
 import { mobile } from '../responsive';
 
@@ -80,9 +81,11 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
-  width: 50%;
-  margin-bottom: 10px;
+  width: 150px;
+  margin-bottom: 20px;
+  margin-left: 20px;
   font-size: 18px;
+  cursor: pointer;
 `;
 
 const Right = styled.div`
@@ -141,16 +144,33 @@ const Footer = () => {
       <Center>
         <Title>Useful Links</Title>
         <List>
-          <ListItem>Home</ListItem>
-          <ListItem>Cart</ListItem>
-          <ListItem>Office Furnitures</ListItem>
-          <ListItem>Dining Furnitures</ListItem>
-          <ListItem>Accessories</ListItem>
-          <ListItem>My Account</ListItem>
-          <ListItem>Order Tracking</ListItem>
-          <ListItem>Wishlist</ListItem>
-          <ListItem>Terms</ListItem>
-          <ListItem>About</ListItem>
+          <Link className="link" to="/">
+            <ListItem>Home</ListItem>
+          </Link>
+          <Link className="link" to="/cart">
+            <ListItem>Cart</ListItem>
+          </Link>
+          <Link className="link" to="/products/art">
+            <ListItem>Wooden Art</ListItem>
+          </Link>
+          <Link className="link" to="/products/table">
+            <ListItem>Dining Furnitures</ListItem>
+          </Link>
+          <Link className="link" to="/">
+            <ListItem>My Account</ListItem>
+          </Link>
+          <Link className="link" to="/">
+            <ListItem>Orders</ListItem>
+          </Link>
+          <Link className="link" to="/">
+            <ListItem>Wishlist</ListItem>
+          </Link>
+          <Link className="link" to="/">
+            <ListItem>Terms</ListItem>
+          </Link>
+          <Link className="link" to="/">
+            <ListItem>About</ListItem>
+          </Link>
         </List>
       </Center>
       <Right>

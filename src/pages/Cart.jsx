@@ -2,8 +2,16 @@ import styled from 'styled-components';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Add, Remove } from '@mui/icons-material';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import StripeCheckout from 'react-stripe-checkout';
 // Responsive
 import { mobile, mobileS } from '../responsive';
+import { useEffect, useState } from 'react';
+import { userRequest } from '../requestMethods';
+import { useNavigate } from 'react-router-dom';
+
+const KEY = process.env.REACT_APP_STRIPE;
 
 const Container = styled.div``;
 
@@ -75,6 +83,7 @@ const ProductDetail = styled.div`
 const Image = styled.img`
   width: 250px;
   height: 200px;
+  object-fit: cover;
   ${mobile({ width: '200px' })}
   ${mobileS({ width: '150px', height: '150px' })}
 `;
@@ -170,6 +179,33 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
+  const cart = useSelector((state) => state.cart);
+  const [stripeToken, setStripeToken] = useState(null);
+  const navigate = useNavigate();
+
+  const onToken = (token) => {
+    setStripeToken(token);
+  };
+
+  useEffect(() => {
+    const makeRequest = async () => {
+      try {
+        const response = await userRequest.post('/checkout/payment', {
+          tokenId: stripeToken.id,
+          amount: cart.total * 100,
+        });
+        navigate('/success', {
+          state: { stripeData: response.data, products: cart },
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    if (stripeToken && cart.total >= 1) {
+      makeRequest();
+    }
+  }, [stripeToken, cart, navigate]);
+
   return (
     <Container>
       <Navbar />
@@ -177,9 +213,11 @@ const Cart = () => {
       <Wrapper>
         <Title>SHOPPING CART</Title>
         <Top>
-          <TopButton bg="white">CONTINUE SHOPPING</TopButton>
+          <Link to="/">
+            <TopButton bg="white">CONTINUE SHOPPING</TopButton>
+          </Link>
           <TopTexts>
-            <TopText>Shopping Cart(3)</TopText>
+            <TopText>Shopping Cart({cart.quantity})</TopText>
             <TopText>Your Wishlist(0)</TopText>
           </TopTexts>
           <TopButton type="filled">CHECKOUT NOW</TopButton>
@@ -187,89 +225,43 @@ const Cart = () => {
 
         <Bottom>
           <Info>
-            <Product>
-              <ProductDetail>
-                <Image src="https://img.muji.net/img/item/4550182583199_1260.jpg" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> SMALL DESK
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 1#989898980
-                  </ProductId>
-                  <ProductColor color="white" />
+            {cart.products.map((product) => (
+              <Product key={product._id}>
+                <ProductDetail>
+                  <Image src={product.img} />
+                  <Details>
+                    <ProductName>
+                      <b>Product:</b> {product.title}
+                    </ProductName>
+                    <ProductId>
+                      <b>ID:</b> {product._id}
+                    </ProductId>
+                    <ProductColor color={product.color} />
 
-                  <ProductSize>
-                    <b>Material:</b> Beech
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add style={{ cursor: 'pointer' }} />
-                  <ProductAmount>1</ProductAmount>
-                  <Remove style={{ cursor: 'pointer' }} />
-                </ProductAmountContainer>
-                <ProductPrice>$ 239.99</ProductPrice>
-              </PriceDetail>
-            </Product>
+                    <ProductSize>
+                      <b>Size:</b> {product.size}
+                    </ProductSize>
+                  </Details>
+                </ProductDetail>
+                <PriceDetail>
+                  <ProductAmountContainer>
+                    <Add style={{ cursor: 'pointer' }} />
+                    <ProductAmount>{product.quantity}</ProductAmount>
+                    <Remove style={{ cursor: 'pointer' }} />
+                  </ProductAmountContainer>
+                  <ProductPrice>
+                    $ {product.price * product.quantity}
+                  </ProductPrice>
+                </PriceDetail>
+              </Product>
+            ))}
             <Hr />
-            <Product>
-              <ProductDetail>
-                <Image src="https://cdn.pixabay.com/photo/2015/11/06/13/28/table-1027888_960_720.jpg" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> OAK TABLE
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 3#369696960
-                  </ProductId>
-                  <ProductColor color="rgba(0,0,0,0.1)" />
-                  <ProductSize>
-                    <b>Material:</b> Oak
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add style={{ cursor: 'pointer' }} />
-                  <ProductAmount>1</ProductAmount>
-                  <Remove style={{ cursor: 'pointer' }} />
-                </ProductAmountContainer>
-                <ProductPrice>$ 1499.99</ProductPrice>
-              </PriceDetail>
-            </Product>
-            <Product>
-              <ProductDetail>
-                <Image src="https://image.architonic.com/img_pro2-4/126/9419/ritz-2-b.jpg" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> WALNUT TABLE
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 54#36954569650
-                  </ProductId>
-                  <ProductColor color="rgba(0,0,0,0.6)" />
-                  <ProductSize>
-                    <b>Material:</b> Walnut
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add style={{ cursor: 'pointer' }} />
-                  <ProductAmount>1</ProductAmount>
-                  <Remove style={{ cursor: 'pointer' }} />
-                </ProductAmountContainer>
-                <ProductPrice>$ 11499.99</ProductPrice>
-              </PriceDetail>
-            </Product>
           </Info>
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal:</SummaryItemText>
-              <SummaryItemPrice>$ 1740</SummaryItemPrice>
+              <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping:</SummaryItemText>
@@ -281,9 +273,23 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total:</SummaryItemText>
-              <SummaryItemPrice>$ 12849.99</SummaryItemPrice>
+              <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
             </SummaryItem>
-            <Button>CHECKOUT NOW</Button>
+            {stripeToken ? (
+              <span>Processing. Please wait...</span>
+            ) : (
+              <StripeCheckout
+                name="MWD.store"
+                billingAddress
+                shippingAddress
+                description={`Your total is $ ${cart.total}`}
+                amount={23000}
+                token={onToken}
+                stripeKey={KEY}
+              >
+                <Button style={{ cursor: 'pointer' }}>Pay Now</Button>
+              </StripeCheckout>
+            )}
           </Summary>
         </Bottom>
       </Wrapper>

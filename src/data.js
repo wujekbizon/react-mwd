@@ -38,13 +38,13 @@ export const categories = [
     id: 1,
     img: 'https://images.pexels.com/photos/8146218/pexels-photo-8146218.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     title: 'DINING TABLES',
-    cat: 'tables',
+    cat: 'table',
   },
   {
     id: 2,
     img: 'https://images.pexels.com/photos/6208155/pexels-photo-6208155.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     title: 'WOODEN ACCESSORIES',
-    cat: 'accesories',
+    cat: 'chair',
   },
   {
     id: 3,

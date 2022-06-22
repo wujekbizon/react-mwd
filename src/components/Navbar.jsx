@@ -2,11 +2,15 @@ import styled from 'styled-components';
 import SearchSharpIcon from '@mui/icons-material/SearchSharp';
 import AddShoppingCartSharpIcon from '@mui/icons-material/AddShoppingCartSharp';
 import { Badge } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 // Responsive
 import { mobile, mobileS } from '../responsive';
+import { logout } from '../redux/apiCalls';
 
 const Container = styled.div`
   height: 80px;
+  border: 1px solid black;
   ${mobile({ height: '60px' })}
 `;
 
@@ -80,7 +84,28 @@ const NavItem = styled.div`
   ${mobile({ fontSize: '12px', marginLeft: '15px' })}
 `;
 
+const NavLogoutButton = styled.button`
+  font-size: 12px;
+  color: white;
+  background-color: black;
+  cursor: pointer;
+  ${mobile({ fontSize: '12px', marginLeft: '15px' })}
+
+  &:hover {
+    color: red;
+  }
+`;
+
 const Navbar = () => {
+  const quantity = useSelector((state) => state.cart.quantity);
+  const user = useSelector((state) => state.user.currentUser);
+  const dispatch = useDispatch();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    logout(dispatch);
+  };
+
   return (
     <Container>
       <Wrapper>
@@ -92,15 +117,30 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>MWD.store</Logo>
+          <Link className="link" to="/">
+            <Logo>MWD.store</Logo>
+          </Link>
         </Center>
         <Right>
-          <NavItem>SIGN UP</NavItem>
-          <NavItem>SIGN IN</NavItem>
-          <NavItem>
-            <Badge badgeContent={4} color="success" />
-            <AddShoppingCartSharpIcon />
-          </NavItem>
+          {user ? (
+            <NavLogoutButton onClick={handleLogout}>LOGOUT</NavLogoutButton>
+          ) : (
+            <>
+              <Link className="link" to="/register">
+                <NavItem>REGISTER</NavItem>
+              </Link>
+              <Link className="link" to="/login">
+                <NavItem>SIGN IN</NavItem>
+              </Link>
+            </>
+          )}
+
+          <Link className="link" to="/cart">
+            <NavItem>
+              <Badge badgeContent={quantity} color="success" />
+              <AddShoppingCartSharpIcon />
+            </NavItem>
+          </Link>
         </Right>
       </Wrapper>
     </Container>
