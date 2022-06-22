@@ -6,6 +6,7 @@ import ProductList from './pages/ProductList';
 import Product from './pages/Product';
 import Cart from './pages/Cart';
 import Success from './pages/Success';
+import Welcome from './pages/Welcome';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -15,6 +16,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" exact element={<Home />} />
+      <Route path="/welcome" element={<Welcome />} />
       <Route path="/products/:category" element={<ProductList />} />
       <Route path="/product/:id" element={<Product />} />
       <Route path="/cart" element={<Cart />} />

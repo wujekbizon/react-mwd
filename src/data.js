@@ -6,7 +6,7 @@ export const sliderItems = [
     desc: 'Best Craftsmanship , Highest Possible Standards, Only Selected Materials',
     bg: '#d2dae2',
     buttonTxt: 'WELCOME',
-    url: '/product/62b0beeb8213a5b11b8c07ce',
+    url: '/welcome',
   },
   {
     id: 2,
@@ -55,6 +55,33 @@ export const categories = [
     img: 'https://images.unsplash.com/photo-1596639103739-91d96a629071?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2020&q=80',
     title: 'ART WORK',
     cat: 'art',
+  },
+];
+
+export const cards = [
+  {
+    id: 1,
+    img: 'https://cameroontimberexport.com/wp-content/uploads/2018/10/Rose-Wood-Logs.jpg',
+    title: 'HIGH QUALITY MATERIALS',
+    desc: 'For many years we have been building highest quality furnitures, wooden accessories any many other wood products. We know how important is the material that we using for production. We buying only selected kiln dried wood.',
+    btnText: 'CHECK PRODUCTS',
+    link: '/products/table',
+  },
+  {
+    id: 2,
+    img: 'https://i.ytimg.com/vi/uNJjzuAyJPQ/maxresdefault.jpg',
+    title: 'BEST CRAFTSMANSHIP',
+    desc: "To build the highest quality furnitures , we know that's not only materials but craftmanship is required. As a small family bussines, we carry from generation the secret technicks of wood crafting. So our customers are 100% satisfied.",
+    btnText: 'REGISTER ACCOUNT',
+    link: '/register',
+  },
+  {
+    id: 3,
+    img: 'https://cdn.windowsreport.com/wp-content/uploads/2020/04/furniture-design-software-1200x675.jpg',
+    title: 'CUSTOM PROJECTS',
+    desc: "First there is an idea, but everything starts on paper. Our projectants making dreams of our client come true. Then the craftsman's are creating high quality products.",
+    btnText: 'PROJECTS',
+    link: '/product/62b0c44b8213a5b11b8c07f6',
   },
 ];
 

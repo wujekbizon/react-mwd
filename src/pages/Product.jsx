@@ -133,7 +133,6 @@ const Button = styled.button`
   position: absolute;
   left: 10px;
   bottom: 10px;
-  border: 1px solid white;
   background-color: black;
   color: white;
   cursor: pointer;

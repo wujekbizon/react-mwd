@@ -71,7 +71,7 @@ const Success = () => {
       try {
         const response = await userRequest.post('/orders', {
           userId: currentUser._id,
-          products: cart.products.map((item) => ({
+          products: cart?.products.map((item) => ({
             productId: item._id,
             quantity: item._quantity,
           })),

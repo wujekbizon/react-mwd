@@ -21,11 +21,6 @@ const Left = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
-  opacity: 0.5;
-  ${mobile({ opacity: 1 })}
-  &:hover {
-    opacity: 1;
-  }
 `;
 
 const Logo = styled.h1`
@@ -91,12 +86,6 @@ const ListItem = styled.li`
 const Right = styled.div`
   flex: 1;
   padding: 20px;
-  opacity: 0.4;
-  ${mobile({ opacity: 1 })}
-
-  &:hover {
-    opacity: 1;
-  }
 `;
 
 const ContactItem = styled.div`
