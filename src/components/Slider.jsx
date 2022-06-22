@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import ArrowBackIosOutlinedIcon from '@mui/icons-material/ArrowBackIosOutlined';
 import { sliderItems } from '../data';
+import { Link } from 'react-router-dom';
 // Responsive
 import { mobile } from '../responsive';
 
@@ -135,9 +136,11 @@ const Slider = () => {
             <InfoContainer>
               <Title>{item.title}</Title>
               <Desc>{item.desc}</Desc>
-              <ButtonContainer>
-                <Button>{item.buttonTxt}</Button>
-              </ButtonContainer>
+              <Link to={item.url}>
+                <ButtonContainer>
+                  <Button>{item.buttonTxt}</Button>
+                </ButtonContainer>
+              </Link>
             </InfoContainer>
           </Slide>
         ))}

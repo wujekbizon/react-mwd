@@ -14,8 +14,8 @@ const Container = styled.div`
 `;
 
 const Logo = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border: 2px solid black;
   background-color: white;
   border-radius: 50%;

@@ -263,14 +263,20 @@ const Cart = () => {
               <SummaryItemText>Subtotal:</SummaryItemText>
               <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
             </SummaryItem>
-            <SummaryItem>
-              <SummaryItemText>Estimated Shipping:</SummaryItemText>
-              <SummaryItemPrice>$ 9.99</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem>
-              <SummaryItemText>Shipping Discount:</SummaryItemText>
-              <SummaryItemPrice>$ -9.99</SummaryItemPrice>
-            </SummaryItem>
+            {cart.length === 0 ? (
+              ''
+            ) : (
+              <>
+                <SummaryItem>
+                  <SummaryItemText>Estimated Shipping:</SummaryItemText>
+                  <SummaryItemPrice>$ 9.99</SummaryItemPrice>
+                </SummaryItem>
+                <SummaryItem>
+                  <SummaryItemText>Shipping Discount:</SummaryItemText>
+                  <SummaryItemPrice>$ -9.99</SummaryItemPrice>
+                </SummaryItem>
+              </>
+            )}
             <SummaryItem type="total">
               <SummaryItemText>Total:</SummaryItemText>
               <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>

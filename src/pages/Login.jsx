@@ -53,6 +53,10 @@ const Button = styled.button`
   color: white;
   cursor: pointer;
   ${mobile({ width: '100%' })}
+  &:disabled {
+    color: green;
+    cursor: not-allowed;
+  }
 `;
 
 const Span = styled.span`
@@ -87,13 +91,14 @@ const Login = () => {
             onChange={(e) => setUsername(e.target.value)}
           />
           <Input
+            type="password"
             placeholder="password"
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button onClick={handleLogin} disabled={isFetching}>
             LOGIN
           </Button>
-          <Error>{error ? 'Something went wrong...' : ''}</Error>
+          {error && <Error>Something went wrong...</Error>}
           <Span>FORGOT PASSWORD?</Span>
           <Link className="link" to="/register">
             <Span>CREATE A NEW ACCOUNT</Span>

@@ -124,21 +124,51 @@ const Footer = () => {
           Carpentry shop is our second home!"
         </Desc>
         <SocialContainer>
-          <SocialIcon color="#3B5998">
-            <FacebookIcon />
-          </SocialIcon>
-          <SocialIcon color="#1DA1F2">
-            <TwitterIcon />
-          </SocialIcon>
-          <SocialIcon color="#0E76A8">
-            <LinkedInIcon />
-          </SocialIcon>
-          <SocialIcon color="#000000">
-            <GitHubIcon />
-          </SocialIcon>
-          <SocialIcon color="#E60023">
-            <PinterestIcon />
-          </SocialIcon>
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://www.facebook.com/Pracownia-Stolarska-MWD-751357234913485"
+          >
+            <SocialIcon color="#3B5998">
+              <FacebookIcon />
+            </SocialIcon>
+          </a>
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://twitter.com/home?lang=en"
+          >
+            <SocialIcon color="#1DA1F2">
+              <TwitterIcon />
+            </SocialIcon>
+          </a>
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://www.linkedin.com/in/grzegorz-wolfinger-b88856229/"
+          >
+            <SocialIcon color="#0E76A8">
+              <LinkedInIcon />
+            </SocialIcon>
+          </a>
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://github.com/wujekbizon"
+          >
+            <SocialIcon color="#000000">
+              <GitHubIcon />
+            </SocialIcon>
+          </a>
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://www.pinterest.co.uk/pin/513762269996339046/"
+          >
+            <SocialIcon color="#E60023">
+              <PinterestIcon />
+            </SocialIcon>
+          </a>
         </SocialContainer>
       </Left>
       <Center>

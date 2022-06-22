@@ -6,6 +6,7 @@ export const sliderItems = [
     desc: 'Best Craftsmanship , Highest Possible Standards, Only Selected Materials',
     bg: '#d2dae2',
     buttonTxt: 'WELCOME',
+    url: '/product/62b0beeb8213a5b11b8c07ce',
   },
   {
     id: 2,
@@ -14,6 +15,7 @@ export const sliderItems = [
     desc: 'High quality , American Walnut Table- Order Now',
     bg: '#c8d6e5',
     buttonTxt: 'ORDER NOW',
+    url: '/product/62b0beeb8213a5b11b8c07ce',
   },
   {
     id: 3,
@@ -22,6 +24,7 @@ export const sliderItems = [
     desc: 'Large selection on all office furnitures - now in low prices',
     bg: '#f1f2f6',
     buttonTxt: 'CHECK NOW',
+    url: '/products/office',
   },
   {
     id: 4,
@@ -30,6 +33,7 @@ export const sliderItems = [
     desc: 'Check our latest collection ',
     bg: '#dfe4ea',
     buttonTxt: 'CHECK NOW',
+    url: '/product/62b0beeb8213a5b11b8c07ce',
   },
 ];
 
@@ -54,53 +58,53 @@ export const categories = [
   },
 ];
 
-export const allProducts = [
-  {
-    id: 1,
-    img: 'https://cdn.pixabay.com/photo/2015/11/06/13/28/table-1027888_960_720.jpg',
-  },
-  {
-    id: 2,
-    img: 'https://echonorthernireland.co.uk/wp-content/uploads/2019/11/wooden_chair-1.jpg',
-  },
-  {
-    id: 3,
-    img: 'https://i.pinimg.com/550x/00/38/b4/0038b4b6e1aa066bd148a308f18e4301.jpg',
-  },
-  {
-    id: 4,
-    img: 'http://sc04.alicdn.com/kf/H7de569376ad446bb90bc306b3a02c514k.jpg',
-  },
-  {
-    id: 5,
-    img: 'https://img.muji.net/img/item/4550182583199_1260.jpg',
-  },
-  {
-    id: 6,
-    img: 'https://5.imimg.com/data5/WB/KR/UZ/SELLER-92144171/epoxy-resin-wooden-conference-table-500x500.jpg',
-  },
-  {
-    id: 7,
-    img: 'https://design-milk.com/images/2015/11/METIS-Desk-Goncalo-Campos-WEWOOD-1.jpg',
-  },
-  {
-    id: 8,
-    img: 'https://adobeinteriors.com/image/cache/catalog/living-room/accent-tables/teak-root-end-table-1-910x1155.jpg',
-  },
-  {
-    id: 9,
-    img: 'https://www.michaelmurphy.ie/wp-content/uploads/2020/07/DSC01693-1200x797.jpg',
-  },
-  {
-    id: 10,
-    img: 'https://image.architonic.com/img_pro2-4/126/9419/ritz-2-b.jpg',
-  },
-  {
-    id: 11,
-    img: 'https://www.homesdirect365.co.uk/images/havana-wooden-coffee-table-p54297-73263_zoom.jpg',
-  },
-  {
-    id: 12,
-    img: 'https://img.archiexpo.com/images_ae/photo-g/65799-1718501.jpg',
-  },
-];
+// export const allProducts = [
+//   {
+//     id: 1,
+//     img: 'https://cdn.pixabay.com/photo/2015/11/06/13/28/table-1027888_960_720.jpg',
+//   },
+//   {
+//     id: 2,
+//     img: 'https://echonorthernireland.co.uk/wp-content/uploads/2019/11/wooden_chair-1.jpg',
+//   },
+//   {
+//     id: 3,
+//     img: 'https://i.pinimg.com/550x/00/38/b4/0038b4b6e1aa066bd148a308f18e4301.jpg',
+//   },
+//   {
+//     id: 4,
+//     img: 'http://sc04.alicdn.com/kf/H7de569376ad446bb90bc306b3a02c514k.jpg',
+//   },
+//   {
+//     id: 5,
+//     img: 'https://img.muji.net/img/item/4550182583199_1260.jpg',
+//   },
+//   {
+//     id: 6,
+//     img: 'https://5.imimg.com/data5/WB/KR/UZ/SELLER-92144171/epoxy-resin-wooden-conference-table-500x500.jpg',
+//   },
+//   {
+//     id: 7,
+//     img: 'https://design-milk.com/images/2015/11/METIS-Desk-Goncalo-Campos-WEWOOD-1.jpg',
+//   },
+//   {
+//     id: 8,
+//     img: 'https://adobeinteriors.com/image/cache/catalog/living-room/accent-tables/teak-root-end-table-1-910x1155.jpg',
+//   },
+//   {
+//     id: 9,
+//     img: 'https://www.michaelmurphy.ie/wp-content/uploads/2020/07/DSC01693-1200x797.jpg',
+//   },
+//   {
+//     id: 10,
+//     img: 'https://image.architonic.com/img_pro2-4/126/9419/ritz-2-b.jpg',
+//   },
+//   {
+//     id: 11,
+//     img: 'https://www.homesdirect365.co.uk/images/havana-wooden-coffee-table-p54297-73263_zoom.jpg',
+//   },
+//   {
+//     id: 12,
+//     img: 'https://img.archiexpo.com/images_ae/photo-g/65799-1718501.jpg',
+//   },
+// ];

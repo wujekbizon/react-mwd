@@ -96,6 +96,7 @@ const AddContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 10px;
   ${mobile({ width: '100%' })}
 `;
 
@@ -124,13 +125,14 @@ const ButtonContainer = styled.div`
   border: 1px solid black;
   background-color: white;
   position: relative;
-  margin-left: 30px;
 `;
 
 const Button = styled.button`
   width: 160px;
   height: 50px;
-  padding: 15px;
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
   border: 1px solid white;
   background-color: black;
   color: white;
@@ -138,17 +140,17 @@ const Button = styled.button`
   font-weight: 500;
   backface-visibility: hidden;
   transition: all 0.3s ease;
+
   &:hover {
-    transform: translateY(10px);
+    transform: translate(-10px, 10px);
     ${mobile({ transform: 'translateY(-10px)' })}
   }
 `;
 
 const Span = styled.div`
   color: red;
-  font-size: 18px;
-  margin-left: 10px;
-  text-align: center;
+  font-size: 16px;
+  margin-left: 100px;
 `;
 
 const Product = () => {
@@ -236,8 +238,8 @@ const Product = () => {
             <ButtonContainer>
               <Button onClick={handleAddToCart}>ADD TO CART</Button>
             </ButtonContainer>
-            {isValid ? <Span>You must choose color and size</Span> : ''}
           </AddContainer>
+          {isValid && <Span>You must choose color and size</Span>}
         </InfoContainer>
       </Wrapper>
       <Newsletter />
