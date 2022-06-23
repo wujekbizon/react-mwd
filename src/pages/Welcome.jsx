@@ -9,15 +9,16 @@ import { Link } from 'react-router-dom';
 const Container = styled.div`
   width: 100vw;
   height: calc(100% - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: linear-gradient(
       rgba(255, 255, 255, 0.3),
       rgba(255, 255, 255, 0.3)
     ),
     url('https://images.unsplash.com/photo-1634141737329-6abd9cfb427a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
   background-size: cover;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  background-position: center;
 `;
 
 const Wrapper = styled.div`
@@ -26,6 +27,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
   ${mobile({ flexDirection: 'column', height: '100%' })}
 `;
 
@@ -41,7 +43,9 @@ const CardContainer = styled.div`
   padding: 20px;
   transition: all 1s ease;
   margin: 0px 30px;
-
+  opacity: 0;
+  animation: fadeIn 2s 1s;
+  animation-fill-mode: forwards;
   ${mobile({ width: '300px', margin: '20px 30px', padding: '10px 5px' })}
 
   &:hover {
@@ -66,7 +70,7 @@ const ImgContainer = styled.div`
   justify-content: center;
   align-content: center;
   margin-top: 30px;
-  ${mobile({ marginTop: '10px' })}
+  ${mobile({ margin: '20px 0px' })}
 `;
 
 const Image = styled.img`
@@ -99,7 +103,7 @@ const BottomContainer = styled.div`
   left: 120px;
   transition: all 0.3s ease;
 
-  ${mobile({ margin: '20px 0px', left: '75px' })}
+  ${mobile({ margin: '30px 0px', left: '75px' })}
 `;
 
 const Button = styled.button`

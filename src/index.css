@@ -7,3 +7,30 @@
   text-decoration: none;
   color: inherit;
 }
+
+.inputForm {
+  padding: 15px;
+  margin: 10px 0px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+label {
+  font-size: 12px;
+  color: gray;
+}
+
+.spanErrorForm {
+  font-size: 12px;
+  padding: 3px;
+  color: red;
+  display: none;
+}
+
+.inputForm:invalid[focused='true'] ~ .spanErrorForm {
+  display: block;
+}
+
+.inputForm:invalid[focused='true'] {
+  border: 1px solid red;
+}
