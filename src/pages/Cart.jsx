@@ -205,7 +205,7 @@ const Cart = () => {
       makeRequest();
     }
   }, [stripeToken, cart, navigate]);
-
+  console.log(cart.length);
   return (
     <Container>
       <Navbar />
@@ -263,7 +263,7 @@ const Cart = () => {
               <SummaryItemText>Subtotal:</SummaryItemText>
               <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
             </SummaryItem>
-            {cart.length === 0 ? (
+            {cart.length === 0 || !cart.length ? (
               ''
             ) : (
               <>

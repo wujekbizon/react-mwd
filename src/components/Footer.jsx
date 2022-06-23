@@ -7,6 +7,7 @@ import PinterestIcon from '@mui/icons-material/Pinterest';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import KeyIcon from '@mui/icons-material/Key';
 import { Link } from 'react-router-dom';
 // Responsive
 import { mobile } from '../responsive';
@@ -158,6 +159,15 @@ const Footer = () => {
               <PinterestIcon />
             </SocialIcon>
           </a>
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://adminpanelmwd.herokuapp.com/login"
+          >
+            <SocialIcon color="#21262d">
+              <KeyIcon style={{ color: '#c9d1d9' }} />
+            </SocialIcon>
+          </a>
         </SocialContainer>
       </Left>
       <Center>
@@ -187,7 +197,7 @@ const Footer = () => {
           <Link className="link" to="/">
             <ListItem>Terms</ListItem>
           </Link>
-          <Link className="link" to="/">
+          <Link className="link" to="/welcome">
             <ListItem>About</ListItem>
           </Link>
         </List>
