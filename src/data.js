@@ -48,7 +48,7 @@ export const categories = [
     id: 2,
     img: 'https://images.pexels.com/photos/6208155/pexels-photo-6208155.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     title: 'WOODEN ACCESSORIES',
-    cat: 'chair',
+    cat: 'kitchen',
   },
   {
     id: 3,

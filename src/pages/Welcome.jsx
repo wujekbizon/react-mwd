@@ -41,11 +41,9 @@ const CardContainer = styled.div`
   flex-direction: column;
   justify-content: space-around;
   padding: 20px;
-  transition: all 1s ease;
   margin: 0px 30px;
-  opacity: 0;
-  animation: fadeIn 2s 1s;
-  animation-fill-mode: forwards;
+  transition: all 1s ease;
+
   ${mobile({ width: '300px', margin: '20px 30px', padding: '10px 5px' })}
 
   &:hover {
@@ -101,7 +99,6 @@ const BottomContainer = styled.div`
   background-color: rgba(255, 255, 255, 0.3);
   position: relative;
   left: 120px;
-  transition: all 0.3s ease;
 
   ${mobile({ margin: '30px 0px', left: '75px' })}
 `;

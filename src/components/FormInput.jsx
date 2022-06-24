@@ -7,6 +7,11 @@ const Container = styled.div`
   width: 70%;
 `;
 
+const Label = styled.label`
+  font-size: 12px;
+  color: gray;
+`;
+
 const FormInput = (props) => {
   const [focused, setFocused] = useState(false);
   const { label, errorMessage, handleChange, id, ...inputProps } = props;
@@ -17,7 +22,7 @@ const FormInput = (props) => {
 
   return (
     <Container>
-      <label>{label}</label>
+      <Label>{label}</Label>
       <input
         className="inputForm"
         {...inputProps}
