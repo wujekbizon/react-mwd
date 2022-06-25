@@ -2,14 +2,21 @@ import styled from 'styled-components';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Add, Remove } from '@mui/icons-material';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import StripeCheckout from 'react-stripe-checkout';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 // Responsive
 import { mobile, mobileS } from '../responsive';
 import { useEffect, useState } from 'react';
 import { userRequest } from '../requestMethods';
 import { useNavigate } from 'react-router-dom';
+import {
+  calculateTotals,
+  decrease,
+  deleteProduct,
+  increase,
+} from '../redux/cartRedux';
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -180,12 +187,18 @@ const Button = styled.button`
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
+  const products = useSelector((state) => state.cart.products);
   const [stripeToken, setStripeToken] = useState(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const onToken = (token) => {
     setStripeToken(token);
   };
+
+  useEffect(() => {
+    dispatch(calculateTotals());
+  }, [products, dispatch]);
 
   useEffect(() => {
     const makeRequest = async () => {
@@ -205,7 +218,11 @@ const Cart = () => {
       makeRequest();
     }
   }, [stripeToken, cart, navigate]);
-  console.log(cart.length);
+
+  const handleDelete = (id) => {
+    dispatch(deleteProduct(id));
+  };
+
   return (
     <Container>
       <Navbar />
@@ -245,10 +262,31 @@ const Cart = () => {
                 </ProductDetail>
                 <PriceDetail>
                   <ProductAmountContainer>
-                    <Add style={{ cursor: 'pointer' }} />
+                    <Add
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => dispatch(increase(product._id))}
+                    />
                     <ProductAmount>{product.quantity}</ProductAmount>
-                    <Remove style={{ cursor: 'pointer' }} />
+                    <Remove
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => {
+                        if (product.quantity === 1) {
+                          dispatch(deleteProduct(product._id));
+                          return;
+                        }
+                        dispatch(decrease(product._id));
+                      }}
+                    />
+                    <DeleteOutlineOutlinedIcon
+                      style={{
+                        marginLeft: '30px',
+                        cursor: 'pointer',
+                        color: 'red',
+                      }}
+                      onClick={() => handleDelete(product._id)}
+                    />
                   </ProductAmountContainer>
+
                   <ProductPrice>
                     $ {product.price * product.quantity}
                   </ProductPrice>

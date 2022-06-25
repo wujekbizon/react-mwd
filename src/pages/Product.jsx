@@ -6,10 +6,10 @@ import { Add, Remove } from '@mui/icons-material';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { publicRequest } from '../requestMethods';
-import { addProduct } from '../redux/cartRedux';
+import { addProduct, calculateTotals, increase } from '../redux/cartRedux';
 // Responsive
 import { mobile } from '../responsive';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Container = styled.div``;
 
@@ -161,6 +161,11 @@ const Product = () => {
   const [color, setColor] = useState(null);
   const [size, setSize] = useState(null);
   const [isValid, setValid] = useState(false);
+  const products = useSelector((state) => state.cart.products);
+
+  useEffect(() => {
+    dispatch(calculateTotals());
+  }, [products, dispatch]);
 
   useEffect(() => {
     const getProduct = async () => {
@@ -177,18 +182,25 @@ const Product = () => {
   }, [id]);
 
   const handleAddToCart = () => {
-    if (!color && !size) {
-      setValid(true);
+    if (color && size !== null) {
+      const sameProduct = products.find((item) => item._id === product._id);
+
+      if (sameProduct && sameProduct._id === product._id) {
+        dispatch(increase(product._id));
+        setValid(false);
+      } else {
+        dispatch(
+          addProduct({
+            ...product,
+            quantity,
+            color,
+            size,
+          })
+        );
+        setValid(false);
+      }
     } else {
-      setValid(false);
-      dispatch(
-        addProduct({
-          ...product,
-          quantity,
-          color,
-          size,
-        })
-      );
+      setValid(true);
     }
   };
 

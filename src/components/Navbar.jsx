@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // Responsive
 import { mobile, mobileS } from '../responsive';
 import { logout } from '../redux/apiCalls';
+import { clearCart } from '../redux/cartRedux';
 
 const Container = styled.div`
   height: 80px;
@@ -104,6 +105,7 @@ const Navbar = () => {
   const handleLogout = (e) => {
     e.preventDefault();
     logout(dispatch);
+    dispatch(clearCart());
   };
 
   return (
