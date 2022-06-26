@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import FormInput from '../components/FormInput';
+import { registerNewUser } from '../redux/apiCalls';
 // Responsive
 import { mobile } from '../responsive';
 
@@ -66,6 +68,7 @@ const Span = styled.span`
 `;
 
 const Register = () => {
+  const dispatch = useDispatch();
   const [values, setValues] = useState({
     username: '',
     email: '',
@@ -119,6 +122,8 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const { confirmPassword, ...newUser } = values;
+    registerNewUser(dispatch, { ...newUser });
   };
 
   const handleChange = (e) => {
