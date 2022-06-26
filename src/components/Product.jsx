@@ -3,6 +3,9 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Link } from 'react-router-dom';
+import { addProduct, calculateTotals, increase } from '../redux/cartRedux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 const Container = styled.div`
   flex: 1;
@@ -61,12 +64,38 @@ const Icon = styled.div`
 `;
 
 const Product = ({ item }) => {
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.cart.products);
+  const quantity = 1;
+  const color = item.color[0];
+  const size = item.size[0];
+
+  useEffect(() => {
+    dispatch(calculateTotals());
+  }, [products, dispatch]);
+
+  const handleClick = () => {
+    const sameProduct = products.find((i) => i._id === item._id);
+    if (sameProduct && sameProduct._id === item._id) {
+      dispatch(increase(item._id));
+    } else {
+      dispatch(
+        addProduct({
+          ...item,
+          quantity,
+          color,
+          size,
+        })
+      );
+    }
+  };
+
   return (
     <Container>
       <Image src={item.img} />
       <Info>
         <Icon>
-          <ShoppingCartOutlinedIcon />
+          <ShoppingCartOutlinedIcon onClick={handleClick} />
         </Icon>
         <Icon>
           <Link to={`/product/${item._id}`} className="link">

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Navbar from '../components/Navbar';
+import Modal from '../components/Modal';
 import Footer from '../components/Footer';
 import { Add, Remove } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,6 +18,7 @@ import {
   deleteProduct,
   increase,
 } from '../redux/cartRedux';
+import { openModal } from '../redux/modalRedux';
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -185,9 +187,31 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
+const CartButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-left: 300px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+`;
+
+const ClearCartButton = styled.button`
+  padding: 7px 10px;
+  border: 1px solid black;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.4s ease;
+
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+`;
+
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const products = useSelector((state) => state.cart.products);
+  const { isOpen } = useSelector((state) => state.modal);
   const [stripeToken, setStripeToken] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -223,8 +247,13 @@ const Cart = () => {
     dispatch(deleteProduct(id));
   };
 
+  const handleOpen = () => {
+    dispatch(openModal());
+  };
+
   return (
     <Container>
+      {isOpen && <Modal />}
       <Navbar />
       <Hr />
       <Wrapper>
@@ -237,6 +266,7 @@ const Cart = () => {
             <TopText>Shopping Cart({cart.quantity})</TopText>
             <TopText>Your Wishlist(0)</TopText>
           </TopTexts>
+
           <TopButton type="filled">CHECKOUT NOW</TopButton>
         </Top>
 
@@ -295,13 +325,14 @@ const Cart = () => {
             ))}
             <Hr />
           </Info>
+
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal:</SummaryItemText>
               <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
             </SummaryItem>
-            {cart.length === 0 || !cart.length ? (
+            {cart.products.length === 0 ? (
               ''
             ) : (
               <>
@@ -336,6 +367,10 @@ const Cart = () => {
             )}
           </Summary>
         </Bottom>
+        <CartButtonContainer>
+          <ClearCartButton onClick={handleOpen}>CLEAR CART</ClearCartButton>
+        </CartButtonContainer>
+        <Hr />
       </Wrapper>
       <Footer />
     </Container>

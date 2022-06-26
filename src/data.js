@@ -15,7 +15,7 @@ export const sliderItems = [
     desc: 'High quality , American Walnut Table- Order Now',
     bg: '#c8d6e5',
     buttonTxt: 'ORDER NOW',
-    url: '/product/62b0beeb8213a5b11b8c07ce',
+    url: '/product/62b5a847d8601543983eb1e2',
   },
   {
     id: 3,
@@ -33,7 +33,7 @@ export const sliderItems = [
     desc: 'Check our latest collection ',
     bg: '#dfe4ea',
     buttonTxt: 'CHECK NOW',
-    url: '/product/62b0beeb8213a5b11b8c07ce',
+    url: '/products/latest',
   },
 ];
 
@@ -81,6 +81,6 @@ export const cards = [
     title: 'CUSTOM PROJECTS',
     desc: "First there is an idea, but everything starts on paper. Our designers making dreams of our client come true. Then the craftsman's are creating the highest quality products.",
     btnText: 'PROJECTS',
-    link: '/product/62b0c44b8213a5b11b8c07f6',
+    link: '/product/62b5a3a7d8601543983eb1c8',
   },
 ];
