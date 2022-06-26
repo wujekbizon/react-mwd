@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import { addProduct, calculateTotals, increase } from '../redux/cartRedux';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { useState } from 'react';
+import { add, remove } from '../redux/wishListRedux';
 
 const Container = styled.div`
   flex: 1;
@@ -66,6 +68,8 @@ const Icon = styled.div`
 const Product = ({ item }) => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.cart.products);
+  const { wishProducts } = useSelector((state) => state.wishList);
+  const [isWish, setIsWish] = useState(false);
   const quantity = 1;
   const color = item.color[0];
   const size = item.size[0];
@@ -90,6 +94,24 @@ const Product = ({ item }) => {
     }
   };
 
+  const handleWish = () => {
+    setIsWish(!isWish);
+    if (!isWish) {
+      dispatch(
+        add({
+          ...item,
+          quantity,
+          color,
+          size,
+        })
+      );
+    } else {
+      const product = wishProducts.find((i) => i._id === item._id);
+      dispatch(remove(product._id));
+      setIsWish(false);
+    }
+  };
+
   return (
     <Container>
       <Image src={item.img} />
@@ -103,7 +125,14 @@ const Product = ({ item }) => {
           </Link>
         </Icon>
         <Icon>
-          <FavoriteBorderOutlinedIcon />
+          {isWish ? (
+            <FavoriteBorderOutlinedIcon
+              onClick={handleWish}
+              style={{ color: 'red' }}
+            />
+          ) : (
+            <FavoriteBorderOutlinedIcon onClick={handleWish} />
+          )}
         </Icon>
       </Info>
     </Container>

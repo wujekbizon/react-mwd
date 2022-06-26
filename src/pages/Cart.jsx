@@ -1,24 +1,25 @@
 import styled from 'styled-components';
 import Navbar from '../components/Navbar';
 import Modal from '../components/Modal';
+import WishlistModal from '../components/WishlistModal';
 import Footer from '../components/Footer';
 import { Add, Remove } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import StripeCheckout from 'react-stripe-checkout';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-// Responsive
-import { mobile, mobileS } from '../responsive';
-import { useEffect, useState } from 'react';
-import { userRequest } from '../requestMethods';
-import { useNavigate } from 'react-router-dom';
 import {
   calculateTotals,
   decrease,
   deleteProduct,
   increase,
 } from '../redux/cartRedux';
-import { openModal } from '../redux/modalRedux';
+import { openModal, openWishModal } from '../redux/modalRedux';
+import { useEffect, useState } from 'react';
+import { userRequest } from '../requestMethods';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import StripeCheckout from 'react-stripe-checkout';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+// Responsive
+import { mobile, mobileS } from '../responsive';
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -193,6 +194,7 @@ const CartButtonContainer = styled.div`
   margin-left: 300px;
   margin-top: 10px;
   margin-bottom: 20px;
+  ${mobile({ margin: '10px 0px' })}
 `;
 
 const ClearCartButton = styled.button`
@@ -211,7 +213,8 @@ const ClearCartButton = styled.button`
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const products = useSelector((state) => state.cart.products);
-  const { isOpen } = useSelector((state) => state.modal);
+  const { quantity } = useSelector((state) => state.wishList);
+  const { isOpen, isWishOpen } = useSelector((state) => state.modal);
   const [stripeToken, setStripeToken] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -251,9 +254,14 @@ const Cart = () => {
     dispatch(openModal());
   };
 
+  const handleWishOpen = () => {
+    dispatch(openWishModal());
+  };
+
   return (
     <Container>
       {isOpen && <Modal />}
+      {isWishOpen && <WishlistModal />}
       <Navbar />
       <Hr />
       <Wrapper>
@@ -264,7 +272,9 @@ const Cart = () => {
           </Link>
           <TopTexts>
             <TopText>Shopping Cart({cart.quantity})</TopText>
-            <TopText>Your Wishlist(0)</TopText>
+            <TopText onClick={handleWishOpen}>
+              Your Wishlist({quantity})
+            </TopText>
           </TopTexts>
 
           <TopButton type="filled">CHECKOUT NOW</TopButton>
