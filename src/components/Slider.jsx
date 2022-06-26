@@ -72,7 +72,7 @@ const InfoContainer = styled.div`
 const Title = styled.h1`
   font-weight: 300;
   font-size: 60px;
-  ${mobile({ fontSize: '35px', textAlign: 'center' })}
+  ${mobile({ fontSize: '35px', textAlign: 'center', color: 'white' })}
 `;
 
 const Desc = styled.p`
@@ -80,7 +80,12 @@ const Desc = styled.p`
   font-size: 20px;
   font-weight: 500;
   letter-spacing: 3px;
-  ${mobile({ fontSize: '16px', textAlign: 'center', margin: '25px 0px' })}
+  ${mobile({
+    fontSize: '16px',
+    textAlign: 'center',
+    margin: '25px 0px',
+    color: 'white',
+  })}
 `;
 
 const ButtonContainer = styled.div`

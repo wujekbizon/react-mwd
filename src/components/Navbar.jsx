@@ -41,7 +41,7 @@ const SearchContainer = styled.div`
   align-items: center;
   margin-left: 25px;
   padding: 5px;
-  ${mobile({ marginLeft: '5px' })}
+  ${mobile({ display: 'none' })}
   ${mobileS({ display: 'none' })}
 `;
 
@@ -65,7 +65,7 @@ const Logo = styled.h1`
   font-weight: 400;
   font-size: 45px;
   letter-spacing: 1px;
-  ${mobile({ fontSize: '22px' })}
+  ${mobile({ fontSize: '30px', marginRight: '10px' })}
   ${mobileS({ marginRight: '20px' })}
 `;
 
@@ -140,7 +140,7 @@ const Navbar = () => {
           <Link className="link" to="/cart">
             <NavItem>
               <Badge badgeContent={quantity} color="success" />
-              <AddShoppingCartSharpIcon />
+              <AddShoppingCartSharpIcon style={{ marginRight: '20px' }} />
             </NavItem>
           </Link>
         </Right>
