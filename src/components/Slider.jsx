@@ -13,6 +13,7 @@ const Container = styled.div`
   display: flex;
   position: relative;
   overflow: hidden;
+  ${mobile({ marginBottom: '10px' })}
 `;
 
 const Arrow = styled.div`
@@ -32,6 +33,7 @@ const Arrow = styled.div`
   cursor: pointer;
   opacity: 0.5;
   z-index: 2;
+  ${mobile({ borderColor: 'white', color: 'white' })}
 `;
 
 const Wrapper = styled.div`
@@ -94,7 +96,7 @@ const ButtonContainer = styled.div`
   border: 1px solid black;
   background-color: white;
   position: relative;
-  ${mobile({ left: '90px' })}
+  ${mobile({ left: '90px', backgroundColor: 'transparent' })}
 `;
 
 const Button = styled.button`

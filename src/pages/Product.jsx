@@ -27,7 +27,7 @@ const ImgContainer = styled.div`
 const Image = styled.img`
   width: 100%;
   height: 80vh;
-  object-fit: contain;
+  object-fit: cover;
   ${mobile({ height: '40vh' })}
 `;
 
@@ -81,6 +81,10 @@ const FilterColor = styled.div`
   background-color: ${(props) => props.color};
   margin: 0 5px;
   cursor: pointer;
+
+  &:active {
+    border: 2px solid black;
+  }
 `;
 
 const FilterSize = styled.select`
